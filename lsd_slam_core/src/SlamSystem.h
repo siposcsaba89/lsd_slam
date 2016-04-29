@@ -31,8 +31,12 @@
 #include "util/SophusUtil.h"
 
 #include "Tracking/Relocalizer.h"
+#include "lsdslam_export.h"
 
-
+#include <deque>
+#if WIN32
+#include <windows.h>
+#endif
 
 namespace lsd_slam
 {
@@ -53,7 +57,7 @@ struct KFConstraintStruct;
 
 typedef Eigen::Matrix<float, 7, 7> Matrix7x7;
 
-class SlamSystem
+class LSDSLAM_EXPORT SlamSystem
 {
 friend class IntegrationTest;
 public:

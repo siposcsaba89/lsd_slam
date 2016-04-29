@@ -23,7 +23,7 @@
 #include <string.h>
 #include <string>
 
-
+#include "lsdslam_export.h"
 
 namespace lsd_slam
 {
@@ -175,87 +175,87 @@ namespace lsd_slam
 
 // settings variables
 // controlled via keystrokes
-extern bool autoRun;
-extern bool autoRunWithinFrame;
-extern int debugDisplay;
-extern bool displayDepthMap;
-extern bool onSceenInfoDisplay;
-extern bool dumpMap;
-extern bool doFullReConstraintTrack;
+extern bool LSDSLAM_EXPORT autoRun;
+extern bool LSDSLAM_EXPORT autoRunWithinFrame;
+extern int LSDSLAM_EXPORT debugDisplay;
+extern bool LSDSLAM_EXPORT displayDepthMap;
+extern bool LSDSLAM_EXPORT onSceenInfoDisplay;
+extern bool LSDSLAM_EXPORT dumpMap;
+extern bool LSDSLAM_EXPORT doFullReConstraintTrack;
 
 
 // dyn config
-extern bool printPropagationStatistics;
-extern bool printFillHolesStatistics;
-extern bool printObserveStatistics;
-extern bool printObservePurgeStatistics;
-extern bool printRegularizeStatistics;
-extern bool printLineStereoStatistics;
-extern bool printLineStereoFails;
-
-extern bool printTrackingIterationInfo;
-extern bool printThreadingInfo;
-
-extern bool printKeyframeSelectionInfo;
-extern bool printConstraintSearchInfo;
-extern bool printOptimizationInfo;
-extern bool printRelocalizationInfo;
-
-extern bool printFrameBuildDebugInfo;
-extern bool printMemoryDebugInfo;
-
-extern bool printMappingTiming;
-extern bool printOverallTiming;
-extern bool plotTrackingIterationInfo;
-extern bool plotSim3TrackingIterationInfo;
-extern bool plotStereoImages;
-extern bool plotTracking;
-
-
-extern bool allowNegativeIdepths;
-extern bool useMotionModel;
-extern bool useSubpixelStereo;
-extern bool multiThreading;
-extern bool useAffineLightningEstimation;
-
-extern float freeDebugParam1;
-extern float freeDebugParam2;
-extern float freeDebugParam3;
-extern float freeDebugParam4;
-extern float freeDebugParam5;
+extern bool LSDSLAM_EXPORT printPropagationStatistics;
+extern bool LSDSLAM_EXPORT printFillHolesStatistics;
+extern bool LSDSLAM_EXPORT printObserveStatistics;
+extern bool LSDSLAM_EXPORT printObservePurgeStatistics;
+extern bool LSDSLAM_EXPORT printRegularizeStatistics;
+extern bool LSDSLAM_EXPORT printLineStereoStatistics;
+extern bool LSDSLAM_EXPORT printLineStereoFails;
+			 
+extern bool LSDSLAM_EXPORT printTrackingIterationInfo;
+extern bool LSDSLAM_EXPORT printThreadingInfo;
+			 
+extern bool LSDSLAM_EXPORT printKeyframeSelectionInfo;
+extern bool LSDSLAM_EXPORT printConstraintSearchInfo;
+extern bool LSDSLAM_EXPORT printOptimizationInfo;
+extern bool LSDSLAM_EXPORT printRelocalizationInfo;
+			 
+extern bool LSDSLAM_EXPORT printFrameBuildDebugInfo;
+extern bool LSDSLAM_EXPORT printMemoryDebugInfo;
+			 
+extern bool LSDSLAM_EXPORT printMappingTiming;
+extern bool LSDSLAM_EXPORT printOverallTiming;
+extern bool LSDSLAM_EXPORT plotTrackingIterationInfo;
+extern bool LSDSLAM_EXPORT plotSim3TrackingIterationInfo;
+extern bool LSDSLAM_EXPORT plotStereoImages;
+extern bool LSDSLAM_EXPORT plotTracking;
 
 
-extern float KFDistWeight;
-extern float KFUsageWeight;
-extern int maxLoopClosureCandidates;
-extern int propagateKeyFrameDepthCount;
-extern float loopclosureStrictness;
-extern float relocalizationTH;
+extern bool LSDSLAM_EXPORT allowNegativeIdepths;
+extern bool LSDSLAM_EXPORT useMotionModel;
+extern bool LSDSLAM_EXPORT useSubpixelStereo;
+extern bool LSDSLAM_EXPORT multiThreading;
+extern bool LSDSLAM_EXPORT useAffineLightningEstimation;
+
+extern float LSDSLAM_EXPORT freeDebugParam1;
+extern float LSDSLAM_EXPORT freeDebugParam2;
+extern float LSDSLAM_EXPORT freeDebugParam3;
+extern float LSDSLAM_EXPORT freeDebugParam4;
+extern float LSDSLAM_EXPORT freeDebugParam5;
 
 
-extern float minUseGrad;
-extern float cameraPixelNoise2;
-extern float depthSmoothingFactor;
+extern float LSDSLAM_EXPORT KFDistWeight;
+extern float LSDSLAM_EXPORT KFUsageWeight;
+extern int LSDSLAM_EXPORT maxLoopClosureCandidates;
+extern int LSDSLAM_EXPORT propagateKeyFrameDepthCount;
+extern float LSDSLAM_EXPORT relocalizationTH;
+extern float LSDSLAM_EXPORT loopclosureStrictness;
 
-extern bool useFabMap;
-extern bool doSlam;
-extern bool doKFReActivation;
-extern bool doMapping;
 
-extern bool saveKeyframes;
-extern bool saveAllTracked;
-extern bool saveLoopClosureImages;
-extern bool saveAllTrackingStages;
-extern bool saveAllTrackingStagesInternal;
+extern float LSDSLAM_EXPORT minUseGrad;
+extern float LSDSLAM_EXPORT cameraPixelNoise2;
+extern float LSDSLAM_EXPORT depthSmoothingFactor;
 
-extern bool continuousPCOutput;
+extern bool LSDSLAM_EXPORT useFabMap;
+extern bool LSDSLAM_EXPORT doSlam;
+extern bool LSDSLAM_EXPORT doKFReActivation;
+extern bool LSDSLAM_EXPORT doMapping;
+
+extern bool LSDSLAM_EXPORT saveKeyframes;
+extern bool LSDSLAM_EXPORT saveAllTracked;
+extern bool LSDSLAM_EXPORT saveLoopClosureImages;
+extern bool LSDSLAM_EXPORT saveAllTrackingStages;
+extern bool LSDSLAM_EXPORT saveAllTrackingStagesInternal;
+
+extern bool LSDSLAM_EXPORT continuousPCOutput;
 
 
 /// Relative path of calibration file, map saving directory etc. for live_odometry
-extern std::string packagePath;
+extern std::string LSDSLAM_EXPORT packagePath;
 
-extern bool fullResetRequested;
-extern bool manualTrackingLossIndicated;
+extern bool LSDSLAM_EXPORT fullResetRequested;
+extern bool LSDSLAM_EXPORT manualTrackingLossIndicated;
 class RunningStats
 {
 public:

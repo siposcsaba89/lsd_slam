@@ -23,12 +23,12 @@
 
 #include <opencv2/core/core.hpp>
 
-
+#include "lsdslam_export.h"
 
 namespace lsd_slam
 {
 
-class Undistorter
+class LSDSLAM_EXPORT Undistorter
 {
 public:
 	virtual ~Undistorter();

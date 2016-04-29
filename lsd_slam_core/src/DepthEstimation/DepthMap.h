@@ -24,7 +24,9 @@
 #include "util/settings.h"
 #include "util/IndexThreadReduce.h"
 #include "util/SophusUtil.h"
-
+#include <Windows.h>
+#include <deque>
+#include <memory>
 
 
 namespace lsd_slam
@@ -88,7 +90,7 @@ public:
 	float msObserve, msRegularize, msPropagate, msFillHoles, msSetDepth;
 	int nUpdate, nCreate, nFinalize;
 	int nObserve, nRegularize, nPropagate, nFillHoles, nSetDepth;
-	struct timeval lastHzUpdate;
+	timeval lastHzUpdate;
 	float nAvgUpdate, nAvgCreate, nAvgFinalize;
 	float nAvgObserve, nAvgRegularize, nAvgPropagate, nAvgFillHoles, nAvgSetDepth;
 

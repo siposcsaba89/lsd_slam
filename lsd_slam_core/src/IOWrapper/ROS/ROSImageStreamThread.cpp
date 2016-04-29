@@ -17,7 +17,7 @@
 * You should have received a copy of the GNU General Public License
 * along with LSD-SLAM. If not, see <http://www.gnu.org/licenses/>.
 */
-
+#if 0
 #include "ROSImageStreamThread.h"
 #include <ros/callback_queue.h>
 
@@ -169,3 +169,4 @@ void ROSImageStreamThread::infoCb(const sensor_msgs::CameraInfoConstPtr info)
 }
 
 }
+#endif

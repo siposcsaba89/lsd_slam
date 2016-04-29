@@ -32,6 +32,7 @@
 #include "IOWrapper/ImageDisplay.h"
 #include "GlobalMapping/KeyFrameGraph.h"
 
+#include <util/gettimeofday.h>
 
 namespace lsd_slam
 {
@@ -191,7 +192,7 @@ bool DepthMap::makeAndCheckEPL(const int x, const int y, const Frame* const ref,
 	float epx = - fx * ref->thisToOther_t[0] + ref->thisToOther_t[2]*(x - cx);
 	float epy = - fy * ref->thisToOther_t[1] + ref->thisToOther_t[2]*(y - cy);
 
-	if(isnanf(epx+epy))
+	if(_isnanf(epx+epy))
 		return false;
 
 
@@ -981,7 +982,7 @@ void DepthMap::initializeFromGTDepth(Frame* new_frame)
 		for(int x=0;x<width;x++)
 		{
 			float idepthValue = idepth[x+y*width];
-			if(!isnanf(idepthValue) && idepthValue > 0)
+			if(!_isnanf(idepthValue) && idepthValue > 0)
 			{
 				averageGTIDepthSum += idepthValue;
 				averageGTIDepthNum ++;
@@ -996,7 +997,7 @@ void DepthMap::initializeFromGTDepth(Frame* new_frame)
 		{
 			float idepthValue = idepth[x+y*width];
 			
-			if(!isnanf(idepthValue) && idepthValue > 0)
+			if(!_isnanf(idepthValue) && idepthValue > 0)
 			{
 				currentDepthMap[x+y*width] = DepthMapPixelHypothesis(
 						idepthValue,
@@ -1073,7 +1074,7 @@ void DepthMap::updateKeyframe(std::deque< std::shared_ptr<Frame> > referenceFram
 {
 	assert(isValid());
 
-	struct timeval tv_start_all, tv_end_all;
+	timeval tv_start_all, tv_end_all;
 	gettimeofday(&tv_start_all, NULL);
 
 	oldest_referenceFrame = referenceFrames.front().get();
@@ -1507,7 +1508,7 @@ inline float DepthMap::doLineStereo(
 
 
 	// check for nan due to eg division by zero.
-	if(isnanf((float)(pFar[0]+pClose[0])))
+	if(_isnanf((float)(pFar[0]+pClose[0])))
 		return -4;
 
 	// calculate increments in which we will step through the epipolar line.

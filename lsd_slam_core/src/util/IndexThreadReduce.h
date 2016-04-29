@@ -25,6 +25,9 @@
 #include <iostream>
 
 
+#ifdef min
+#undef min
+#endif
 
 namespace lsd_slam
 {

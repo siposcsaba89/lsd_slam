@@ -1,0 +1,14 @@
+include(CMakeFindDependencyMacro)
+
+#find_dependency(Eigen3 @EIGEN3_VERSION_STRING@ EXACT)
+find_dependency(Eigen3)
+find_dependency(csparse)
+set(Boost_USE_STATIC_LIBS        ON) # only find static libs
+set(Boost_USE_MULTITHREADED      ON)
+set(Boost_USE_STATIC_RUNTIME    OFF)
+find_dependency(Boost @Boost_MAJOR_VERSION@.@Boost_MINOR_VERSION@.@Boost_SUBMINOR_VERSION@ EXACT)
+
+find_dependency(OpenCV @OpenCV_VERSION@ EXACT)
+find_dependency(G2O)
+
+include("${CMAKE_CURRENT_LIST_DIR}/lsdslam-targets.cmake")

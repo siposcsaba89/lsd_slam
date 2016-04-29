@@ -24,7 +24,7 @@
 #include <string>
 #include <chrono>
 #include <boost/thread/mutex.hpp>
-
+#include <chrono>
 
 
 // TODO: remove this hack
@@ -75,10 +75,13 @@ public:
 	static Timestamp now();
 	
 private:
-	std::chrono::monotonic_clock::time_point timePoint;
+	//DANGER
+	//std::chrono::monotonic_clock::time_point timePoint;
+	std::chrono::system_clock::time_point timePoint;
 	std::chrono::system_clock::time_point systemTimePoint;
 	
-	static const std::chrono::monotonic_clock::time_point startupTimePoint;
+	//static const std::chrono::monotonic_clock::time_point startupTimePoint;
+	static const std::chrono::system_clock::time_point startupTimePoint;
 	static boost::mutex localtimeMutex;
 
 	double externalStamp;

@@ -17,7 +17,7 @@
 * You should have received a copy of the GNU General Public License
 * along with LSD-SLAM. If not, see <http://www.gnu.org/licenses/>.
 */
-
+#if 0
 #include "ROSOutput3DWrapper.h"
 #include "util/SophusUtil.h"
 #include <ros/ros.h>
@@ -212,3 +212,4 @@ void ROSOutput3DWrapper::publishDebugInfo(Eigen::Matrix<float, 20, 1> data)
 }
 
 }
+#endif

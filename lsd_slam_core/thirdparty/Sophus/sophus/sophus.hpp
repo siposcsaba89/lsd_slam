@@ -32,6 +32,8 @@ namespace std {
   using ::log1p;
 }
 #endif
+#define _USE_MATH_DEFINES
+#include <math.h>
 
 #include <Eigen/Eigen>
 #include <Eigen/Geometry>

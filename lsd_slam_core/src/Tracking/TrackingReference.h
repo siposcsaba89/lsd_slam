@@ -21,6 +21,8 @@
 #pragma once
 #include "util/settings.h"
 #include "util/EigenCoreInclude.h"
+//#include <thread>
+//#include <mutex>
 #include "boost/thread/mutex.hpp"
 #include <boost/thread/shared_mutex.hpp>
 
@@ -56,6 +58,7 @@ public:
 	void importFrame(Frame* source);
 
 	Frame* keyframe;
+	//std::sha
 	boost::shared_lock<boost::shared_mutex> keyframeLock;
 	int frameID;
 

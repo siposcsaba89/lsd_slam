@@ -19,6 +19,9 @@
 */
 
 #include "SlamSystem.h"
+#ifdef min
+#undef min
+#endif
 
 #include "DataStructures/Frame.h"
 #include "Tracking/SE3Tracker.h"
@@ -44,10 +47,13 @@
 #include <android/log.h>
 #endif
 
+#ifdef min
+#undef min
+#endif
+
 #include "opencv2/opencv.hpp"
-
+#include "util/gettimeofday.h"
 using namespace lsd_slam;
-
 
 SlamSystem::SlamSystem(int w, int h, Eigen::Matrix3f K, bool enableSLAM)
 : SLAMEnabled(enableSLAM), relocalizer(w,h,K)
@@ -192,11 +198,6 @@ void SlamSystem::mergeOptimizationOffset()
 
 	poseConsistencyMutex.unlock();
 
-
-
-
-
-
 	if(needPublish)
 		publishKeyframeGraph();
 }
@@ -230,7 +231,7 @@ void SlamSystem::finalize()
 	while(lastNumConstraintsAddedOnFullRetrack != 0)
 	{
 		doFullReConstraintTrack = true;
-		usleep(200000);
+		Sleep(200);
 	}
 
 
@@ -242,7 +243,7 @@ void SlamSystem::finalize()
 	newConstraintMutex.unlock();
 	while(doFinalOptimization)
 	{
-		usleep(200000);
+		Sleep(200);
 	}
 
 
@@ -252,13 +253,13 @@ void SlamSystem::finalize()
 	unmappedTrackedFramesMutex.unlock();
 	while(doFinalOptimization)
 	{
-		usleep(200000);
+		Sleep(200);
 	}
 	boost::unique_lock<boost::mutex> lock(newFrameMappedMutex);
 	newFrameMappedSignal.wait(lock);
 	newFrameMappedSignal.wait(lock);
 
-	usleep(200000);
+	Sleep(200);
 	printf("Done Finalizing Graph.!!\n");
 }
 
