@@ -1,6 +1,11 @@
 cmake_minimum_required(VERSION 2.8.7)
 project(lsd_slam_core)
 
+if(MSVC)
+      SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}" "/MP")
+      MESSAGE(STATUS "Added parallel build arguments to CMAKE_CXX_FLAGS: ${CMAKE_CXX_FLAGS}")
+endif()
+
 set(CMAKE_CXX_VISIBILITY_PRESET hidden)
 set(CMAKE_VISIBILITY_INLINES_HIDDEN 1)
 set(CMAKE_CXX_STANDARD 11)
@@ -18,8 +23,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
 
 #rosbuild_init() 
 
-set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
-set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
+#set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
+#set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
 #set(CMAKE_MODULE_PATH   ${PROJECT_SOURCE_DIR}/cmake ${CMAKE_MODULE_PATH})
 
 find_package(Eigen3 REQUIRED)
@@ -99,7 +104,7 @@ set(SOURCE_FILES
 
 # build shared library.
 add_library(lsdslam SHARED ${SOURCE_FILES})
-
+add_library(::lsdslam ALIAS lsdslam)
 target_compile_definitions(lsdslam PUBLIC "-DENABLE_SSE")
 
 #g2o_core g2o_stuff csparse cxsparse g2o_solver_csparse g2o_csparse_extension g2o_types_sim3 g2o_types_sba

@@ -42,91 +42,6 @@
 #endif
 #include "opencv2/opencv.hpp"
 
-std::string &ltrim(std::string &s) {
-	s.erase(s.begin(), std::find_if(s.begin(), s.end(), std::not1(std::ptr_fun<int, int>(std::isspace))));
-	return s;
-}
-std::string &rtrim(std::string &s) {
-	s.erase(std::find_if(s.rbegin(), s.rend(), std::not1(std::ptr_fun<int, int>(std::isspace))).base(), s.end());
-	return s;
-}
-std::string &trim(std::string &s) {
-	return ltrim(rtrim(s));
-}
-int getdir(std::string dir, std::vector<std::string> &files)
-{
-	//DIR *dp;
-	//struct dirent *dirp;
-	//if ((dp = opendir(dir.c_str())) == NULL)
-	//{
-	//	return -1;
-	//}
-	//
-	//while ((dirp = readdir(dp)) != NULL) {
-	//	std::string name = std::string(dirp->d_name);
-	//
-	//	if (name != "." && name != "..")
-	//		files.push_back(name);
-	//}
-	//closedir(dp);
-	//
-	//
-	//std::sort(files.begin(), files.end());
-	//
-	//if (dir.at(dir.length() - 1) != '/') dir = dir + "/";
-	//for (unsigned int i = 0; i<files.size(); i++)
-	//{
-	//	if (files[i].at(0) != '/')
-	//		files[i] = dir + files[i];
-	//}
-
-	return files.size();
-}
-
-int getFile(std::string source, std::vector<std::string> &files)
-{
-	std::ifstream f(source.c_str());
-
-	if (f.good() && f.is_open())
-	{
-		while (!f.eof())
-		{
-			std::string l;
-			std::getline(f, l);
-
-			l = trim(l);
-
-			if (l == "" || l[0] == '#')
-				continue;
-
-			files.push_back(l);
-		}
-
-		f.close();
-
-		size_t sp = source.find_last_of('/');
-		std::string prefix;
-		if (sp == std::string::npos)
-			prefix = "";
-		else
-			prefix = source.substr(0, sp);
-
-		for (unsigned int i = 0; i<files.size(); i++)
-		{
-			if (files[i].at(0) != '/')
-				files[i] = prefix + "/" + files[i];
-		}
-
-		return (int)files.size();
-	}
-	else
-	{
-		f.close();
-		return -1;
-	}
-
-}
-
 
 using namespace lsd_slam;
 int main(int argc, char** argv)
@@ -140,12 +55,13 @@ int main(int argc, char** argv)
 	//srvDebug.setCallback(dynConfCbDebug);
 
 	//packagePath = ros::package::getPath("lsd_slam_core") + "/";
+    std::string source_name = "d:/Projects/3drec/MOV_0208.mp4";
+    std::string calibFile = "calib.cfg";
 
-
-
+    //std::string source_name = "D:/Projects/3drec/LSD_machine/images/%05d.png";
+    //std::string calibFile = "d:/Projects/3drec/LSD_machine/cameraCalibration.cfg";
 	// get camera calibration in form of an undistorter object.
 	// if no undistortion is required, the undistorter will just pass images through.
-	std::string calibFile = "calib.cfg";
 	Undistorter* undistorter = 0;
 	//if (ros::param::get("~calib", calibFile))
 	//{
@@ -182,36 +98,20 @@ int main(int argc, char** argv)
 	SlamSystem* system = new SlamSystem(w, h, K, doSlam);
 	system->setVisualization(outputWrapper);
 
-	cv::VideoCapture capture("d:/tmp/data/test_videos/here_full2.mp4");
+  
+    cv::VideoCapture capture(source_name);
 
 	// open image files: first try to open as file.
-	std::string source = "files.txt";
-	std::vector<std::string> files;
+	//std::string source = "files.txt";
+	//std::vector<std::string> files;
 	//if (!ros::param::get("~files", source))
 	//{
 	//	printf("need source files! (set using _files:=FOLDER)\n");
 	//	exit(0);
 	//}
 	//ros::param::del("~files");
-
-
-	if (getdir(source, files) >= 0)
-	{
-		printf("found %d image files in folder %s!\n", (int)files.size(), source.c_str());
-	}
-	else if (getFile(source, files) >= 0)
-	{
-		printf("found %d image files in file %s!\n", (int)files.size(), source.c_str());
-	}
-	else
-	{
-		printf("could not load file list! wrong path / file?\n");
-	}
-
-
-
 	// get HZ
-	double hz = 0;
+	double hz = 29;
 	//if (!ros::param::get("~hz", hz))
 	//	hz = 0;
 	//ros::param::del("~hz");
@@ -222,15 +122,16 @@ int main(int argc, char** argv)
 	int runningIDX = 0;
 	float fakeTimeStamp = 0;
 
-	//ros::Rate r(hz);
+	//ros::Rate r(hz); 
 	cv::Mat input_img;
 	cv::Mat imageDist;// = cv::imread(files[i], CV_LOAD_IMAGE_GRAYSCALE);
-
+    //capture.set(CV_CAP_PROP_POS_MSEC, 15000);
 	while (capture.read(input_img))
 	{
-		cv::Mat o_i = input_img(cv::Rect(0, 200, 1280, 416));
-		cv::cvtColor(o_i, imageDist, CV_RGB2GRAY);
-
+		//cv::Mat o_i = input_img(cv::Rect(0, 200, 1280, 416));
+        //cv::cvtColor(o_i, imageDist, CV_RGB2GRAY);
+        cv::cvtColor(input_img, imageDist, CV_RGB2GRAY);
+        //imageDist = input_img;
 
 		if (imageDist.rows != h_inp || imageDist.cols != w_inp)
 		{
@@ -274,7 +175,8 @@ int main(int argc, char** argv)
 			runningIDX = 0;
 		}
 
-		cv::imshow("o_i", o_i);
+        //cv::imshow("o_i", o_i);
+        cv::imshow("o_i", input_img);
 		int key = cv::waitKey(10);
 		if (key == 27)
 		{
