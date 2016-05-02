@@ -6,6 +6,7 @@ set(LIBRARY_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR}/bin)
 
 option(BUILD_TEST "Build lsd test" OFF)
 
+add_subdirectory(csparse)
 add_subdirectory(lsd_slam_core)
 if(BUILD_TEST)
 	add_subdirectory(lsd_test)

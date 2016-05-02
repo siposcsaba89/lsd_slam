@@ -32,7 +32,11 @@ message(INFORMATION " eigen version ${EIGEN3_VERSION_STRING}")
 #find_package(SuiteParse REQUIRED) # Apparently needed by g2o
 find_package(OpenCV REQUIRED)
 message(INFORMATION " opencv version ${OpenCV_VERSION}")
-find_package(csparse REQUIRED)
+
+if (NOT TARGET csparse)
+	find_package(csparse REQUIRED)
+endif()
+
 message(INFORMATION " csparse version ${csparse_VERSION}")
 
 
