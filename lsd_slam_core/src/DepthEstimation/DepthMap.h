@@ -24,7 +24,9 @@
 #include "util/settings.h"
 #include "util/IndexThreadReduce.h"
 #include "util/SophusUtil.h"
+#if WIN32
 #include <Windows.h>
+#endif
 #include <deque>
 #include <memory>
 

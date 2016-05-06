@@ -23,6 +23,11 @@
 #include "DepthEstimation/DepthMapPixelHypothesis.h"
 #include "Tracking/TrackingReference.h"
 #include <math.h>
+
+#if !defined(WIN32)
+#define _isnanf(x) isnanf(x)
+#endif
+
 namespace lsd_slam
 {
 

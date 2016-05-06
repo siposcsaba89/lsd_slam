@@ -51,6 +51,11 @@
 #undef min
 #endif
 
+#if !defined(Win32)
+#define Sleep(x) sleep(1000 * x)
+#endif
+
+
 #include "opencv2/opencv.hpp"
 #include "util/gettimeofday.h"
 using namespace lsd_slam;

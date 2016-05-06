@@ -2,6 +2,9 @@ cmake_minimum_required(VERSION 3.0)
 
 project(test_lsd_slam)
 
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
+
 
 if(NOT TARGET ::lsdslam)
 	message("INFORMATION Finding lsdslam ... ")

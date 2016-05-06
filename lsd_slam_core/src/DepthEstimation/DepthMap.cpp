@@ -34,6 +34,10 @@
 
 #include <util/gettimeofday.h>
 
+#if !defined(WIN32)
+#define _isnanf(x) isnanf(x)
+#endif
+
 namespace lsd_slam
 {
 

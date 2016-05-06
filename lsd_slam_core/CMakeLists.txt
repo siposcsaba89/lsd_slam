@@ -40,10 +40,10 @@ endif()
 message(INFORMATION " csparse version ${csparse_VERSION}")
 
 
-set(Boost_USE_STATIC_LIBS        ON) # only find static libs
+set(Boost_USE_STATIC_LIBS        OFF) # only find static libs
 set(Boost_USE_MULTITHREADED      ON)
 set(Boost_USE_STATIC_RUNTIME    OFF)
-find_package(Boost REQUIRED COMPONENTS thread chrono)
+find_package(Boost REQUIRED COMPONENTS thread chrono system)
 message(INFORMATION " boost version ${Boost_VERSION}")
 
 find_package(G2O REQUIRED)
@@ -70,7 +70,7 @@ message(INFORMATION " g2o version ${G2O_VERSION}")
 # Also add some useful compiler flag
 if(NOT MSVC)
 	set(CMAKE_CXX_FLAGS
-		"${CMAKE_CXX_FLAGS} ${SSE_FLAGS} -march=native  -std=c++0x"
+		"${CMAKE_CXX_FLAGS} ${SSE_FLAGS} -march=native  -std=c++0x -fPIC"
 	)
 endif()	
 
