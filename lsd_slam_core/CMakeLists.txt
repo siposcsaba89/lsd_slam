@@ -109,7 +109,7 @@ set(SOURCE_FILES
 # build shared library.
 add_library(lsdslam SHARED ${SOURCE_FILES})
 add_library(::lsdslam ALIAS lsdslam)
-target_compile_definitions(lsdslam PUBLIC "-DENABLE_SSE")
+target_compile_definitions(lsdslam PUBLIC -DENABLE_SSE -DBOOST_ALL_NO_LIB)
 
 #g2o_core g2o_stuff csparse cxsparse g2o_solver_csparse g2o_csparse_extension g2o_types_sim3 g2o_types_sba
 target_link_libraries(lsdslam 

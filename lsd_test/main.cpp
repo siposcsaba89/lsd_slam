@@ -26,7 +26,7 @@
 #include "util/settings.h"
 #include "util/globalFuncs.h"
 #include "SlamSystem.h"
-
+#include "DataStructures/Frame.h"
 #include <sstream>
 #include <fstream>
 //#include <dirent.h>
@@ -55,7 +55,8 @@ int main(int argc, char** argv)
 	//srvDebug.setCallback(dynConfCbDebug);
 
 	//packagePath = ros::package::getPath("lsd_slam_core") + "/";
-    std::string source_name = "d:/Projects/3drec/MOV_0208.mp4";
+	//std::string source_name = "d:/tmp/data/Car.mp4";
+	std::string source_name = "r:/2016.02.12_Iphone_recordings/IMG_2531.MOV";
     std::string calibFile = "calib.cfg";
 
     //std::string source_name = "D:/Projects/3drec/LSD_machine/images/%05d.png";
@@ -152,7 +153,8 @@ int main(int argc, char** argv)
 			system->randomInit(image.data, fakeTimeStamp, runningIDX);
 		else
 			system->trackFrame(image.data, runningIDX, true, fakeTimeStamp);
-
+		lsd_slam::Frame * f = system->getCurrentKeyframe();
+		system->getCurrentKeyframe();
 		//for (int i = 0; i < 100; ++i)
 			//system->trackFrame(image.data, runningIDX, true, fakeTimeStamp);
 
